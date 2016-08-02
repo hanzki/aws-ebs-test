@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+  vars:
+    aws_region: eu-west-1
+    bucket_name: hanzki-ebs-test
+    cf_template_path: cloudformation.json
+    code_s3_key: deploy.zip
+    code_path: deploy.zip
+    cf_stack_name: hanzkiebstest
+  tasks:
+    - name: Create project S3 bucket
+      s3: bucket={{ bucket_name }} region={{ aws_region }} mode=create
+
+    - name: Copy lambda code to S3 bucket
+      s3: bucket={{ bucket_name }} region={{ aws_region }} mode=put overwrite=different object={{ code_s3_key }} src={{ code_path }}
+
+    - name: Create cloudformation stack
+      cloudformation:
+        stack_name: "{{ cf_stack_name }}"
+        state: present
+        region: "{{ aws_region }}"
+        disable_rollback: true
+        template: "{{ cf_template_path }}"
+        template_parameters:
+          CodeS3Bucket: "{{ bucket_name }}"
+          CodeS3Key: "{{ code_s3_key }}"
+        tags:
+          Stack: "{{ cf_stack_name }}"
+      register: stack
+
+
