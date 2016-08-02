@@ -32,7 +32,7 @@ test:
 deployment:
   master:
     branch: master
-    owner: FunduOy
+    owner: hanzki
     commands:
       - sbt war
       - zip -j deploy.zip target/*.war
