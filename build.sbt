@@ -8,7 +8,7 @@ Play2WarPlugin.play2WarSettings
 
 Play2WarKeys.servletVersion := "3.1"
 
-Play2WarKeys.targetName := Some("ROOT")
+Play2WarKeys.targetName := Some("ebstest")
 
 lazy val `aws_ebs_test` = (project in file(".")).enablePlugins(PlayScala)
 
