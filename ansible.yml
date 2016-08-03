@@ -24,6 +24,8 @@
         template_parameters:
           CodeS3Bucket: "{{ bucket_name }}"
           CodeS3Key: "{{ code_s3_key }}"
+          DbUser: "hanzki"
+          DbPass: "{{ lookup('env','DB_PASS') }}"
         tags:
           Stack: "{{ cf_stack_name }}"
       register: stack
