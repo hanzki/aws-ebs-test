@@ -35,6 +35,7 @@ deployment:
     owner: hanzki
     commands:
       - sbt war
+      - touch target/_dummy.war
       - zip -j deploy.zip target/*.war
       - ansible-playbook ansible.yml -c local -e "ansible_python_interpreter=$(which python)"
 
