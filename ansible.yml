@@ -4,7 +4,7 @@
     aws_region: eu-west-1
     bucket_name: hanzki-ebs-test
     cf_template_path: cloudformation.json
-    code_s3_key: deploy.zip
+    code_s3_key: "CCI-build-{{ lookup('env','CIRCLE_BUILD_NUM') }}/deploy.zip"
     code_path: deploy.zip
     cf_stack_name: hanzkiebstest
   tasks:
