@@ -38,5 +38,6 @@ deployment:
       - touch target/_dummy.war
       - zip -j deploy.zip target/*.war
       - ansible-playbook ansible.yml -c local -e "ansible_python_interpreter=$(which python)"
+        timeout: 1200 # if ansible needs to create RDS database it can easily take 15 mintues
 
 
